@@ -6,7 +6,7 @@ import RegistrationPage from "./pages/RegistrationPage.jsx";
 import BookingPage from "./pages/BookingPage.jsx";
 import UserProfilePage from "./pages/UserProfilePage.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
-import HomePage from "./pages/HomePage.jsx";
+import HomePage from "./pages/Home/HomePage.jsx";
 
 function App() {
   return (
