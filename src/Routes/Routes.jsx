@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage";
 import Error from "../Error/Error";
 import AdminHome from "../pages/Dashboard/AdminHome";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,16 +23,20 @@ const router = createBrowserRouter([
         element: <SearchResultsPage />,
       },
       {
-        path: "/admin",
-        element: <AdminHome />,
-      },
-      {
         path: "/login",
         element: <LoginPage />,
       },
       {
         path: "/register",
         element: <RegistrationPage />,
+      },
+      {
+        path: "/admin",
+        element: (
+          <PrivateRoute>
+            <AdminHome />
+          </PrivateRoute>
+        ),
       },
     ],
   },
