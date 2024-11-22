@@ -2,8 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout, role } = useAuth();
   const navigate = useNavigate();
+
+  console.log("user", role);
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -15,7 +17,11 @@ function Navbar() {
   };
 
   const handleProfileClick = () => {
-    navigate("/admin");
+    if (role == "User") {
+      navigate("/user-profile");
+    } else if (role == "Admin") {
+      navigate("/admin-profile");
+    }
   };
 
   const handleFlightsClick = () => {

@@ -7,6 +7,7 @@ import Error from "../Error/Error";
 import AdminHome from "../pages/Dashboard/AdminHome";
 import PrivateRoute from "./PrivateRoute";
 import Flight from "../pages/Flight/Flight";
+import UserProfilePage from "../pages/UserProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,15 @@ const router = createBrowserRouter([
         element: <RegistrationPage />,
       },
       {
-        path: "/admin",
+        path: "/user-profile",
+        element: (
+          <PrivateRoute>
+            <UserProfilePage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin-profile",
         element: (
           <PrivateRoute>
             <AdminHome />

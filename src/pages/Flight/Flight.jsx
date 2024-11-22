@@ -119,7 +119,7 @@ function Flight() {
         }}
       ></div>
 
-      <div className="container mx-auto min-h-screen p-10 relative z-10 bg-white bg-opacity-90">
+      <div className="container mx-auto min-h-screen p-10 relative bg-white bg-opacity-90">
         <h2 className="text-7xl text-center uppercase font-bold pb-14">
           {searchParams.origin || searchParams.destination || searchParams.date
             ? "Search Results"

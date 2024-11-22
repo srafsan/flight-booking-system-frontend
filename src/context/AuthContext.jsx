@@ -2,6 +2,10 @@ import { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext(null);
 
+const parseJWT = (token) => {
+  return JSON.parse(atob(token.split(".")[1]));
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,7 +14,12 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = () => {
       const token = localStorage.getItem("token");
       if (token) {
-        setUser({ token });
+        const decodedToken = parseJWT(token);
+        setUser({
+          token,
+          role: decodedToken?.role || "User",
+          id: decodedToken?.id,
+        });
       } else {
         setUser(null);
       }
@@ -28,8 +37,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (token) => {
     return new Promise((resolve) => {
+      const decodedToken = parseJWT(token);
       localStorage.setItem("token", token);
-      setUser({ token });
+      setUser({
+        token,
+        role: decodedToken?.role || "User",
+        id: decodedToken?.id,
+      });
       resolve();
     });
   };
@@ -47,6 +61,8 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     logout,
+    role: user?.role || null,
+    userId: user?.id || null,
   };
 
   return (

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 
 function BookingModal({ flightId }) {
+  const { userId } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [seats, setSeats] = useState(1);
@@ -16,10 +18,11 @@ function BookingModal({ flightId }) {
       await axios.post(
         `${API_BASE_URL}/api/bookings`,
         {
+          userId,
           flightId,
           name,
           email,
-          seats,
+          numberOfSeats: seats,
         },
         {
           headers: {
