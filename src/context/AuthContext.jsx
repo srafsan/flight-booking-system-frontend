@@ -7,22 +7,39 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in on component mount
-    const token = localStorage.getItem("token");
-    if (token) {
-      setUser({ token }); // You can decode JWT here to get user details if needed
-    }
-    setLoading(false);
+    const checkAuth = () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setUser({ token });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    };
+
+    checkAuth();
+
+    window.addEventListener("storage", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+    };
   }, []);
 
-  const login = (token) => {
-    localStorage.setItem("token", token);
-    setUser({ token });
+  const login = async (token) => {
+    return new Promise((resolve) => {
+      localStorage.setItem("token", token);
+      setUser({ token });
+      resolve();
+    });
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+  const logout = async () => {
+    return new Promise((resolve) => {
+      localStorage.removeItem("token");
+      setUser(null);
+      resolve();
+    });
   };
 
   const value = {
@@ -32,7 +49,11 @@ export const AuthProvider = ({ children }) => {
     logout,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
