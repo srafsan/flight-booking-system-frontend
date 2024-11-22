@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
@@ -18,25 +18,30 @@ function Navbar() {
     navigate("/admin");
   };
 
+  const handleFlightsClick = () => {
+    navigate("/flights");
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Excel</a>
+        <Link href="/" className="btn btn-ghost text-xl">
+          Excel Flights
+        </Link>
       </div>
       <div className="flex-none gap-2">
+        <button onClick={handleFlightsClick} className="btn btn-ghost">
+          Flights
+        </button>
+
         {user ? (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-primary avatar uppercase"
             >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="User avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
-              </div>
+              Dashboard
             </div>
             <ul
               tabIndex={0}

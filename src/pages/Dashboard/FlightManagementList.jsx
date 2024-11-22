@@ -1,6 +1,6 @@
 import { Pencil, Plus, Trash2 } from "lucide-react";
 
-function FlightList({ flights }) {
+function FlightManagementList({ flights }) {
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
       <div className="flex justify-between items-center mb-6">
@@ -45,4 +45,4 @@ function FlightList({ flights }) {
   );
 }
 
-export default FlightList;
+export default FlightManagementList;

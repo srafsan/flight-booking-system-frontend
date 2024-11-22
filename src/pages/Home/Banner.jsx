@@ -9,7 +9,7 @@ function Banner() {
 
   const handleSearch = () => {
     navigate(
-      `/search?origin=${origin}&destination=${destination}&date=${date}`
+      `/flights?origin=${origin}&destination=${destination}&date=${date}`
     );
   };
 

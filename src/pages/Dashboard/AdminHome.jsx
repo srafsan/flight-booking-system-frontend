@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { LayoutGrid, Plane, Calendar, Users, Settings } from "lucide-react";
 import axios from "axios";
-import FlightList from "./FlightList";
+import FlightManagementList from "./FlightManagementList";
 import BookingList from "./BookingList";
 import UserList from "./UserList";
 
@@ -122,7 +122,7 @@ const AdminHome = () => {
           </div>
         );
       case "flights":
-        return <FlightList flights={flights} />;
+        return <FlightManagementList flights={flights} />;
       case "bookings":
         return <BookingList bookings={bookings} />;
       case "users":
